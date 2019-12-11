@@ -1,53 +1,36 @@
-from graph import *
 from paint_module import *
 
+windowSize(600, 600)
 width, height = windowSize()
+canvasSize(width, height)
 
 brushColor(0, 255, 255)
 penColor(0, 255, 255)
-rectangle(0, -height, width, height/2)
+rectangle(0, 0, width, height*0.5)
 brushColor(0, 0, 255)
 penColor(0, 0, 255)
-rectangle(0, height/2, width, (2 * height / 3))
+rectangle(0, height*0.5, width, height*0.75)
+points = wave_painter(height*0.7, width)
 brushColor(255, 255, 0)
 penColor(255, 255, 0)
-rectangle(0, (2 * height / 3), width, height)
-circle((width - 100), height/5, 50)
-penColor(192, 192, 192)
-brushColor(255, 255, 255)
-r = 10
-for i in range(7):
-    if i % 2 == 0:
-        circle((i+10)*8, height/5, r)
-    else:
-        circle((i+10)*8, height/5.5, r)
+p = ([width, height], [0, height], [0, height*0.7])
+points.append(p)
+polygon(points)
 
-inclined_rectangle(5, 100, 0, (width/2 + 20), (height/2 - 70), 'black')
-inclined_rectangle(150, 30, 0, (width/2 - 30), (height/2 + 30), 'brown')
-triangle_painter(70, 30, 90, (width/2 + 120), (height/2 + 30), 0, 'brown')
-quarter_circle(30, 'SW', (width/2 - 30), (height/2 + 30), 'brown')
-sail_ac = math.hypot(50, 15)
-sail_ab = math.hypot(50, 50)
-sail_bax = round(math.degrees(math.acos(50/sail_ab)))
-yac = round(math.degrees(math.acos(50/sail_ac)), 2)
-sail_cab = 90 - (yac + sail_bax)
-triangle_painter(sail_ab, sail_ac, sail_cab, (width/2 + 25), (height/2 - 70), sail_bax, [245, 245, 220])
-sail_bax = -sail_bax
-sail_cab = -sail_cab
-triangle_painter(sail_ab, sail_ac, sail_cab, (width/2 + 25), (height/2 + 30), sail_bax, 'beige')
-brushColor('black')
-circle((width/2 + 135), (height/2 + 42), 9)
-brushColor('white')
-circle((width/2 + 135), (height/2 + 42), 7)
-ab = 60
-x = width/5
-y = height/2 + 50
-triangle_painter(ab, ab, 120, x, y, 30, [255, 69, 0])
-x1 = x - round(ab * (math.cos(math.radians(30))), 1)
-y1 = y + round(ab * (math.sin(math.radians(30))), 1)
-bc = 2 * ab * math.sin(math.radians(60))
-triangle_hatching(bc, x, y, x1, y1, 8)
-inclined_rectangle(5, 150, 0, x-2, y, [255, 69, 0])
+
+sun_painter(width*0.8, height*0.2, 50, 50, 10)
+
+penColor(192, 192, 192)
+cloud_painter(15, 7, width/5, height/7)
+cloud_painter([17, 20], 7, 2*width/5, height/7, form='ellipse')
+cloud_painter([20, 17], 7, width/9, height/3, form='ellipse')
+
+penColor('black')
+boat_painter(width*0.4, height*0.05, width*0.6, height*0.57)
+boat_painter(width*0.2, height*0.025, width*0.25, height*0.52)
+
+beach_umbrella_painter(150, 200, width*0.2, height*0.55, [255, 69, 0])
+beach_umbrella_painter(70, 105, width*0.4, height*0.65, [255, 69, 0])
 
 
 
